@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Northern Star Engineering Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWix+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkR4j8R+5DVFQ5XG0Q5KQ9vN9+8nbTov4+1g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="hero">
+        <div>
+          <p class="company">Northern Star Engineering</p>
+          <h1>Smart Project Flow Dashboard</h1>
+          <p class="subtitle">
+            Track running, completed, and dispute projects with billing, phase timelines,
+            and payment intelligence.
+          </p>
+        </div>
+        <button id="addProjectBtn" class="primary-btn">
+          <i class="fa-solid fa-plus"></i> Add New Project
+        </button>
+      </header>
+
+      <section class="kpis" id="kpiGrid"></section>
+
+      <section class="panel controls">
+        <div class="control-item search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="searchInput" placeholder="Search project, billing name, client, city..." />
+        </div>
+        <div class="control-item">
+          <label>Status</label>
+          <select id="statusFilter">
+            <option value="all">All</option>
+            <option value="running">Running</option>
+            <option value="completed">Completed</option>
+            <option value="dispute">Dispute</option>
+          </select>
+        </div>
+        <div class="control-item">
+          <label>Phase</label>
+          <select id="phaseFilter">
+            <option value="all">All Phases</option>
+            <option value="planning">Planning</option>
+            <option value="execution">Execution</option>
+            <option value="testing">Testing</option>
+            <option value="handover">Handover</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="main-grid">
+        <article class="panel table-panel">
+          <div class="panel-head">
+            <h2>Projects</h2>
+            <button class="ghost-btn" id="exportDashboardBtn"><i class="fa-solid fa-file-pdf"></i> Export Dashboard PDF</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Project</th>
+                  <th>Status</th>
+                  <th>Phase</th>
+                  <th>Value</th>
+                  <th>Official Received</th>
+                  <th>Cash Received</th>
+                  <th>Pending</th>
+                  <th>Expected Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="projectTableBody"></tbody>
+            </table>
+          </div>
+        </article>
+
+        <aside class="panel detail-panel" id="detailPanel">
+          <h2><i class="fa-solid fa-circle-info"></i> Project Details</h2>
+          <p class="placeholder">Select a project to view full client and billing details.</p>
+        </aside>
+      </section>
+
+      <section class="panel chart-area">
+        <div class="panel-head">
+          <h2>Dashboard Analytics</h2>
+        </div>
+        <div class="chart-grid">
+          <div class="chart-card">
+            <h3>Status Split</h3>
+            <canvas id="statusChart"></canvas>
+          </div>
+          <div class="chart-card">
+            <h3>Value vs Received vs Pending</h3>
+            <canvas id="moneyChart"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <p>Developed by Abhishek Jariwala</p>
+        <small>Project Flow Dashboard • Northern Star Engineering</small>
+      </footer>
+    </div>
+
+    <dialog id="projectDialog">
+      <form id="projectForm" method="dialog">
+        <div class="dialog-head">
+          <h3 id="dialogTitle">Add Project</h3>
+          <button type="button" id="closeDialog" class="icon-btn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="form-grid" id="formFields"></div>
+        <menu>
+          <button type="button" class="ghost-btn" id="cancelDialog">Cancel</button>
+          <button type="submit" class="primary-btn">Save Project</button>
+        </menu>
+      </form>
+    </dialog>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
